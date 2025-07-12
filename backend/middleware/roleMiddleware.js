@@ -1,11 +1,21 @@
-//middleware/roleMiddleware.js
-const roleMiddleware = (...allowedRoles) => {
-  return (req, res, next) => {
-    if (!req.user || !allowedRoles.includes(req.user.role)) {
-      return res.status(403).json({ message: 'Access denied' });
-    }
-    next();
-  };
+// middleware/roleMiddleware.js
+exports.isPlayer = (req, res, next) => {
+  if (req.user?.role !== "player") {
+    return res.status(403).json({ message: "Only players are allowed" });
+  }
+  next();
 };
 
-module.exports = roleMiddleware;
+exports.isOwner = (req, res, next) => {
+  if (req.user?.role !== "arena_owner") {
+    return res.status(403).json({ message: "Only arena owners are allowed" });
+  }
+  next();
+};
+
+exports.isAdmin = (req, res, next) => {
+  if (req.user?.role !== "admin") {
+    return res.status(403).json({ message: "Only admins are allowed" });
+  }
+  next();
+};
