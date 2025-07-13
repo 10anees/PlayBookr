@@ -4,7 +4,7 @@ const User = require('../models/User');
 // GET /api/users/me
 exports.getMe = async (req, res) => {
   try {
-    const user = await User.findById(req.user.userId).select('-password -refreshToken');
+    const user = await User.findById(req.user._id).select('-password -refreshToken');
     if (!user) return res.status(404).json({ message: 'User not found' });
 
     res.json(user);
@@ -25,7 +25,7 @@ exports.updateMe = async (req, res) => {
 
   try {
     const user = await User.findByIdAndUpdate(
-      req.user.userId,
+      req.user._id,
       { $set: updates },
       { new: true, runValidators: true }
     ).select('-password -refreshToken');

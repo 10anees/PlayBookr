@@ -1,3 +1,6 @@
+const mongoose = require("mongoose");
+const { Schema } = mongoose;
+
 const arenaSchema = new Schema(
   {
     name: { type: String, required: true },
@@ -22,6 +25,8 @@ const arenaSchema = new Schema(
     ],
     approved: { type: Boolean, default: false }, // admin approval
     rating: { type: Number, default: 0 },
+    totalReviews: { type: Number, default: 0 },
+    isActive: { type: Boolean, default: true },
   },
   { timestamps: true }
 );
