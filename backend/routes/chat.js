@@ -21,11 +21,13 @@ const { requireChatAccess } = require('../middleware/roleMiddleware');
 // All routes require authentication
 router.use(auth);
 
-// Chat management routes
+// Chat management routes (specific routes first)
 router.get('/', getMyChats);
 router.get('/direct/:userId', getDirectChat);
-router.get('/:id', getChatById);
 router.post('/', createChat);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getChatById);
 
 // Message routes
 router.post('/:id/messages', sendMessage);

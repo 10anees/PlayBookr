@@ -18,15 +18,17 @@ const { requireReviewAccess } = require('../middleware/roleMiddleware');
 
 // Public routes
 router.get('/', getAllReviews);
-router.get('/:id', getReviewById);
 router.get('/arena/:arenaId', getArenaReviews);
 
 // Protected routes
 router.use(auth);
 
-// Review management routes
+// Review management routes (specific routes first)
 router.get('/my-reviews', getMyReviews);
 router.post('/', createReview);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getReviewById);
 router.put('/:id', updateReview);
 router.delete('/:id', deleteReview);
 

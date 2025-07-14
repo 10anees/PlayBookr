@@ -20,15 +20,17 @@ const { requireAdminOrArenaOwner, requireTournamentAccess } = require('../middle
 
 // Public routes
 router.get('/', getAllTournaments);
-router.get('/:id', getTournamentById);
 
 // Protected routes
 router.use(auth);
 
-// Tournament management routes
+// Tournament management routes (specific routes first)
 router.get('/my-tournaments', requireAdminOrArenaOwner, getMyTournaments);
 router.get('/participating', getParticipatingTournaments);
 router.post('/', requireAdminOrArenaOwner, createTournament);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getTournamentById);
 router.put('/:id', updateTournament);
 router.delete('/:id', deleteTournament);
 

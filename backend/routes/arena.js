@@ -18,14 +18,16 @@ const { requireAdminOrArenaOwner, requireAdmin } = require('../middleware/roleMi
 // Public routes
 router.get('/', getAllArenas);
 router.get('/search/nearby', searchNearbyArenas);
-router.get('/:id', getArenaById);
 
 // Protected routes
 router.use(auth);
 
-// Arena owner routes
+// Arena owner routes (specific routes first)
 router.get('/my-arenas', requireAdminOrArenaOwner, getMyArenas);
 router.post('/', requireAdminOrArenaOwner, createArena);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getArenaById);
 router.put('/:id', updateArena);
 router.delete('/:id', deleteArena);
 

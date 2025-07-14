@@ -19,14 +19,16 @@ const { requirePlayer, requireTeamAccess } = require('../middleware/roleMiddlewa
 // Public routes
 router.get('/', getAllTeams);
 router.get('/leaderboard', getLeaderboard);
-router.get('/:id', getTeamById);
 
 // Protected routes
 router.use(auth);
 
-// Player routes
+// Player routes (specific routes first)
 router.get('/my-teams', requirePlayer, getMyTeams);
 router.post('/', requirePlayer, createTeam);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getTeamById);
 router.put('/:id', updateTeam);
 router.delete('/:id', deleteTeam);
 

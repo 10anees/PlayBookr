@@ -19,12 +19,14 @@ const { requireBookingAccess } = require('../middleware/roleMiddleware');
 // All routes require authentication
 router.use(auth);
 
-// Booking management routes
+// Booking management routes (specific routes first)
 router.get('/', getAllBookings);
 router.get('/my-bookings', getMyBookings);
 router.get('/arena/:arenaId', getArenaBookings);
-router.get('/:id', getBookingById);
 router.post('/', createBooking);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getBookingById);
 router.put('/:id', updateBooking);
 router.delete('/:id', cancelBooking);
 

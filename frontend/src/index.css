@@ -1,4 +1,8 @@
-/* src/index.css */
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+:root {
+    --color-main-bg: #2C2C2C;
+    --color-secondary-bg: #45474B;
+    --color-primary: #379777;
+    --color-secondary-accent: #F4CE14;
+    --color-text: #F5F7F8;
+}
+@import "tailwindcss";

@@ -21,23 +21,21 @@ const { requireAdmin } = require('../middleware/roleMiddleware');
 // All routes require authentication
 router.use(auth);
 
-// Notification management routes
+// Notification management routes (specific routes first)
 router.get('/', getMyNotifications);
 router.get('/unread-count', getUnreadCount);
 router.get('/settings', getNotificationSettings);
-router.get('/:id', getNotificationById);
-
-// Notification actions
-router.put('/:id/read', markAsRead);
-router.put('/:id/unread', markAsUnread);
 router.put('/read-all', markAllAsRead);
-router.delete('/:id', deleteNotification);
 router.delete('/delete-all', deleteAllNotifications);
-
-// Settings
 router.post('/settings', updateNotificationSettings);
 
-// Admin routes
+// Admin routes (specific routes first)
 router.post('/test', requireAdmin, sendTestNotification);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getNotificationById);
+router.put('/:id/read', markAsRead);
+router.put('/:id/unread', markAsUnread);
+router.delete('/:id', deleteNotification);
 
 module.exports = router; 

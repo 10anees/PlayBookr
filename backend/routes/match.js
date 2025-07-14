@@ -19,14 +19,16 @@ const { requireMatchAccess } = require('../middleware/roleMiddleware');
 
 // Public routes
 router.get('/', getAllMatches);
-router.get('/:id', getMatchById);
 
 // Protected routes
 router.use(auth);
 
-// Match management routes
+// Match management routes (specific routes first)
 router.get('/my-matches', getMyMatches);
 router.post('/', createMatch);
+
+// Parameterized routes (after specific routes)
+router.get('/:id', getMatchById);
 router.put('/:id', updateMatch);
 
 // Match challenge routes
